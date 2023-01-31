@@ -1,0 +1,115 @@
+body {
+    margin: 0;
+    height: 100vh;
+    width: 100vw;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    overflow-x: hidden;
+    font-family:'Courier New', Courier, monospace;
+    background-color: rgb(77, 45, 81);
+    color: white;
+}
+
+.calculator {
+    display: flex;
+    flex-direction: column;
+    height: 100vh;
+    min-width: 60vw;
+    justify-content: center;
+
+}
+
+.head {
+    display: flex;
+    height: 60px;
+}
+
+.head div {
+    border: 5px solid black;
+    background-color:rgb(158, 103, 165);
+    font-size: min(max(8px, 3vw), 50px);
+}
+
+#clear {
+    display: flex;
+    flex-basis: 30px;
+    flex-grow: 1;
+    align-items: center;
+    justify-content: center;
+    margin: 4px;
+    background-color: black;
+}
+
+#output {
+    display: flex;
+    flex-basis: 30px;
+    flex-grow: 2;
+    align-items: center;
+    justify-content: center;
+    margin: 4px;
+    color: black;
+    background-color:rgb(235, 235, 235);;
+}
+
+.face {
+    display: flex;
+    flex-direction: row; 
+}
+
+.face > div {
+    flex-basis: 150px;
+    flex-grow: 1;
+}
+
+.column-one div {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    border: 5px solid black;
+    background-color:rgb(158, 103, 165);
+    font-size: min(max(8px, 3vw), 50px);
+    margin: 4px 4px 8px 4px;
+    height: 10vh;
+}
+
+.column-two div {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    border: 5px solid black;
+    background-color:rgb(158, 103, 165);
+    font-size: min(max(8px, 3vw), 50px);
+    margin: 4px 4px 8px 4px;
+    height: 10vh;
+}
+
+.column-three div {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    border: 5px solid black;
+    background-color:rgb(158, 103, 165);
+    font-size: min(max(8px, 3vw), 50px);
+    margin: 4px 4px 8px 4px;
+    height: 10vh;
+}
+
+.column-three > #equals {
+    background-color:rgb(162, 69, 174);
+}
+
+.column-four div {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    border: 5px solid black;
+    background-color:rgb(196, 74, 74);
+    font-size: min(max(8px, 3vw), 50px);
+    margin: 4px 4px 8px 4px;
+    height: 10vh;
+}
