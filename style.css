@@ -62,60 +62,41 @@ body {
     flex-grow: 1;
 }
 
-.column-one div {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    border: 5px solid black;
-    background-color:rgb(158, 103, 165);
-    font-size: min(max(8px, 3vw), 50px);
-    margin: 4px 4px 8px 4px;
-    height: 10vh;
-}
-
-.column-two div {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    border: 5px solid black;
-    background-color:rgb(158, 103, 165);
-    font-size: min(max(8px, 3vw), 50px);
-    margin: 4px 4px 8px 4px;
-    height: 10vh;
-}
-
-.column-three div {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    border: 5px solid black;
-    background-color:rgb(158, 103, 165);
-    font-size: min(max(8px, 3vw), 50px);
-    margin: 4px 4px 8px 4px;
-    height: 10vh;
-}
-
-.column-three > #equals {
+#equals {
     background-color:rgb(162, 69, 174);
 }
 
 .column-four div {
+    background-color:rgb(196, 74, 74); 
+}
+
+.top-button {
+    -webkit-touch-callout: none; 
+    -webkit-user-select: none; 
+    -khtml-user-select: none; 
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+}
+
+.button {
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
     border: 5px solid black;
-    background-color:rgb(196, 74, 74);
+    background-color:rgb(158, 103, 165);
     font-size: min(max(8px, 3vw), 50px);
     margin: 4px 4px 8px 4px;
     height: 10vh;
-}
-
-.button {
     cursor: pointer;
+    -webkit-touch-callout: none; 
+    -webkit-user-select: none; 
+    -khtml-user-select: none; 
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+                               
 }
 
 .b-press {
