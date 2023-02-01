@@ -113,3 +113,14 @@ body {
     margin: 4px 4px 8px 4px;
     height: 10vh;
 }
+
+.button {
+    cursor: pointer;
+}
+
+.b-press {
+    transition: all .05s ease;
+    transform: scale(.95);
+    border-color: rgb(20, 3, 22);
+    box-shadow: 0 0 .5rem rgb(20, 3, 22);
+}
