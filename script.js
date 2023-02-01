@@ -38,6 +38,15 @@ function nextAction(e) {
         return;
     }
 
+    //ensures no multiple decimals
+    if (output.textContent.includes('.') && e.target.textContent == '.' &&
+        (lastInput !== '÷') && 
+        (lastInput !== 'x') &&
+        (lastInput !== '-') &&
+        (lastInput !== '+')
+        
+    ) {return}
+
     //ensures no division by 0
     if ((e.target.textContent == '÷' || 
         e.target.textContent == 'x' || 
@@ -59,6 +68,15 @@ function nextAction(e) {
         return;
     }
 
+    //ensures 0 and 0. cannot be populated by more zeros
+
+    if((output.textContent == '0' || output.textContent == '0.') && e.target.textContent == '0') {return};
+
+    if(output.textContent.length > 21) {
+        output.textContent = 'EXCEED'; 
+        return};
+
+    //a series of functions to cap the result # and the display #
     if (output.textContent > '999999999' && parseFloat(output.textContent) == NaN) {
         numberOne = '';
         numberTwo = '';
@@ -144,8 +162,10 @@ function nextAction(e) {
         else if (operator == 'plus' && 
         e.target.hasAttribute('id')) {
             let result = Number(numberOne) + Number(numberTwo);
+            //let roundResult = parseFloat(result.toFixed(8))
             numberTwo = '';
             operator = e.target.getAttribute('id');
+            //numberOne = roundResult;
             numberOne = result;
             } 
 
@@ -158,12 +178,11 @@ function nextAction(e) {
     else if (e.target == minus) {operator = 'minus'}
     else if (e.target == plus) {operator = 'plus'}
     else if (e.target.textContent == '=') {return}
-    else if (output.textContent.includes('.') && e.target.textContent == '.') {return}
 
     else {numberOne += e.target.textContent}
 
     //this section determines what is displayed on-screen
-    if (numberTwo > 0) {
+    if (numberTwo > 0 || numberTwo.includes('.')) {    //ensures .x and larger numbers appear
         output.textContent = numberTwo;
     }
     else {output.textContent = numberOne}
