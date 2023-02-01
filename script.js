@@ -29,6 +29,14 @@ output.textContent = '';
 let lastInput = null;
 
 function nextAction(e) {
+     //this section clears board, aborts the calculation, and leaves the func.
+     if (e.target == clear) {
+        numberOne = '';
+        numberTwo = '';
+        operator ='';
+        output.textContent = '';
+        return;
+    }
 
     //ensures no division by 0
     if ((e.target.textContent == '÷' || 
@@ -42,6 +50,7 @@ function nextAction(e) {
         return;
     }
 
+    //resets after 0
     if(output.textContent == 'NICE TRY') {
         numberOne = '';
         numberTwo = '';
@@ -50,12 +59,24 @@ function nextAction(e) {
         return;
     }
 
-    //this section clears board, aborts the calculation, and leaves the func.
-    if (e.target == clear) {
+    if (output.textContent > '999999999' && parseFloat(output.textContent) == NaN) {
         numberOne = '';
         numberTwo = '';
         operator ='';
         output.textContent = '';
+        return;
+    }
+
+    if(output.textContent == 'EXCEED') {
+        numberOne = '';
+        numberTwo = '';
+        operator ='';
+        output.textContent = '';
+        return;
+    }
+
+    if (Number(output.textContent) > '999999999') {
+        output.textContent = 'EXCEED'; 
         return;
     }
 
@@ -142,12 +163,7 @@ function nextAction(e) {
     else {numberOne += e.target.textContent}
 
     //this section determines what is displayed on-screen
-    if (numberTwo >= 0 && 
-        ((lastInput == '÷') || 
-        (lastInput == 'x') || 
-        (lastInput == '-') || 
-        (lastInput == '+')
-        )) {
+    if (numberTwo > 0) {
         output.textContent = numberTwo;
     }
     else {output.textContent = numberOne}
@@ -159,7 +175,6 @@ function logAction(e) {
     setTimeout(() => {output.classList.remove('output-flash')}, 200);
     lastInput = e.target.textContent;
 }
-
 
 actions.forEach(action => action.addEventListener('click', nextAction));
 actions.forEach(action => action.addEventListener('click', logAction));

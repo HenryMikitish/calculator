@@ -49,6 +49,7 @@ body {
     justify-content: center;
     margin: 4px;
     color: black;
+    min-width: 114px;
     background-color:rgb(235, 235, 235);
 }
 
