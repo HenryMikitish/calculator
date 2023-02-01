@@ -49,7 +49,7 @@ body {
     justify-content: center;
     margin: 4px;
     color: black;
-    background-color:rgb(235, 235, 235);;
+    background-color:rgb(235, 235, 235);
 }
 
 .face {
@@ -100,8 +100,14 @@ body {
 }
 
 .b-press {
-    transition: all .05s ease;
+    transition: all .01s ease;
     transform: scale(.95);
     border-color: rgb(20, 3, 22);
     box-shadow: 0 0 .5rem rgb(20, 3, 22);
+}
+
+.output-flash {
+    transition: all .2s ease;
+    transform: scale(.99);
+    background-color: rgb(213, 213, 213) !important;
 }
