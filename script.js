@@ -14,20 +14,7 @@ topButton.forEach(button => button.addEventListener('click', press));
 
 //calculations
 
-const clear = document.querySelector('#clear');
-const output = document.querySelector('#output');
 const actions = document.querySelectorAll('.action');
-const seven = document.querySelector('#seven');
-const four = document.querySelector('#four');
-const one = document.querySelector('#one');
-const zero = document.querySelector('#zero');
-const eight = document.querySelector('#eight');
-const five = document.querySelector('#five');
-const two = document.querySelector('#two');
-const decimal = document.querySelector('#decimal');
-const nine = document.querySelector('#nine');
-const six = document.querySelector('#six');
-const three = document.querySelector('#three');
 const equals = document.querySelector('#equals');
 const divide = document.querySelector('#divide');
 const multiply = document.querySelector('#multiply');
@@ -50,30 +37,64 @@ function nextAction(e) {
         return;
     }
 
+    if (operator == 'equals' && !e.target.hasAttribute('id')) {
+        numberOne = '';
+        numberTwo = '';
+        operator ='';
+        output.textContent = '';
+        let refresh = numberOne += e.target.textContent;
+        output.textContent = refresh;
+        return;
+    }
+
     //if (output.textContent.length < 10) {
     
         //this section handles the second number and prints the result to numberOne
         if (operator == 'divide' || operator == 'multiply' || operator == 'minus' || operator == 'plus') {
-            if (e.target == seven)
-                {numberTwo += '7'}
-            else if (e.target == four)
-                {numberTwo += '4'}
-
-            else if (operator == 'plus') {
-                let result = Number(numberOne) + Number(numberTwo);
+            
+            if (operator == 'divide' && 
+            e.target.hasAttribute('id')) {
+                let result = Number(numberOne) / Number(numberTwo);
                 numberTwo = '';
+                operator = e.target.getAttribute('id');
                 numberOne = result;
                 }
+            
+            else if (operator == 'multiply' && 
+            e.target.hasAttribute('id')) {
+                let result = Number(numberOne) * Number(numberTwo);
+                numberTwo = '';
+                operator = e.target.getAttribute('id');
+                numberOne = result;
+                }   
+
+            else if (operator == 'minus' && 
+            e.target.hasAttribute('id')) {
+                let result = Number(numberOne) - Number(numberTwo);
+                numberTwo = '';
+                operator = e.target.getAttribute('id');
+                numberOne = result;
+                }  
+            
+            else if (operator == 'plus' && 
+            e.target.hasAttribute('id')) {
+                let result = Number(numberOne) + Number(numberTwo);
+                numberTwo = '';
+                operator = e.target.getAttribute('id');
+                numberOne = result;
+                } 
+
+            else {numberTwo += e.target.textContent}
         }
         
         //this section factors the first number
-        else if (e.target == seven)
-            {numberOne += '7'}
-        else if (e.target == four)
-            {numberOne += '4'}
-        else if (e.target == plus)
-            {operator = 'plus'}
+        else if (e.target == divide) {operator = 'divide'}
+        else if (e.target == multiply) {operator = 'multiply'}
+        else if (e.target == minus) {operator = 'minus'}
+        else if (e.target == plus) {operator = 'plus'}
+        else if (e.target.textContent == '=') {return}
 
+        else {numberOne += e.target.textContent}
 
         //this section determines what is displayed on-screen
         if (numberTwo > 0) {
