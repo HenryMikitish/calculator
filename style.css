@@ -49,7 +49,7 @@ body {
     justify-content: center;
     margin: 4px;
     color: black;
-    min-width: 114px;
+    min-width: 114px; /*ensures at smaller resolutions that the output screen isn't too small for larger numbers*/
     background-color:rgb(235, 235, 235);
 }
 
@@ -72,7 +72,7 @@ body {
 }
 
 .top-button {
-    -webkit-touch-callout: none; 
+    -webkit-touch-callout: none; /*these remove the ability to highlight text*/
     -webkit-user-select: none; 
     -khtml-user-select: none; 
     -moz-user-select: none;
@@ -91,7 +91,7 @@ body {
     margin: 4px 4px 8px 4px;
     height: 10vh;
     cursor: pointer;
-    -webkit-touch-callout: none; 
+    -webkit-touch-callout: none;
     -webkit-user-select: none; 
     -khtml-user-select: none; 
     -moz-user-select: none;
@@ -110,5 +110,5 @@ body {
 .output-flash {
     transition: all .2s ease;
     transform: scale(.99);
-    background-color: rgb(213, 213, 213) !important;
+    background-color: rgb(213, 213, 213) !important; /*flag relieves need for complex css to handle small issue*/
 }

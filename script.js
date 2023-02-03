@@ -22,8 +22,8 @@ const minus = document.querySelector('#minus');
 const plus = document.querySelector('#plus');
 const output = document.querySelector('#output');
 
-let numberOne = '';
-let numberTwo = '';
+let firstOperand = '';
+let secondOperand = '';
 let operator ='';
 output.textContent = '';
 let lastInput = null;
@@ -31,21 +31,22 @@ let lastInput = null;
 function nextAction(e) {
      //this section clears board, aborts the calculation, and leaves the func.
      if (e.target == clear) {
-        numberOne = '';
-        numberTwo = '';
-        operator ='';
+        firstOperand = '';
+        secondOperand = '';
+        operator = '';
         output.textContent = '';
         return;
     }
 
     //ensures no multiple decimals
-    if (output.textContent.includes('.') && e.target.textContent == '.' &&
+    if (output.textContent.includes('.') && 
+        e.target.textContent == '.' &&
         (lastInput !== '÷') && 
         (lastInput !== 'x') &&
         (lastInput !== '-') &&
-        (lastInput !== '+')
-        
-    ) {return}
+        (lastInput !== '+')) {
+            return;
+    }
 
     //ensures no division by 0
     if ((e.target.textContent == '÷' || 
@@ -55,14 +56,14 @@ function nextAction(e) {
         e.target.textContent == '=') 
         && 
         lastInput == '0' && operator == 'divide') {
-        output.textContent = 'NICE TRY';
-        return;
+            output.textContent = 'NICE TRY';
+            return;
     }
 
-    //resets after 0
+    //resets after /0
     if(output.textContent == 'NICE TRY') {
-        numberOne = '';
-        numberTwo = '';
+        firstOperand = '';
+        secondOperand = '';
         operator ='';
         output.textContent = '';
         return;
@@ -70,24 +71,27 @@ function nextAction(e) {
 
     //ensures 0 and 0. cannot be populated by more zeros
 
-    if((output.textContent == '0' || output.textContent == '0.') && e.target.textContent == '0') {return};
+    if((output.textContent == '0' || output.textContent == '0.') && e.target.textContent == '0') {
+        return;
+    }
 
     if(output.textContent.length > 21) {
         output.textContent = 'EXCEED'; 
-        return};
+        return;
+    }
 
     //a series of functions to cap the result # and the display #
     if (output.textContent > '999999999' && parseFloat(output.textContent) == NaN) {
-        numberOne = '';
-        numberTwo = '';
+        firstOperand = '';
+        secondOperand = '';
         operator ='';
         output.textContent = '';
         return;
     }
 
     if(output.textContent == 'EXCEED') {
-        numberOne = '';
-        numberTwo = '';
+        firstOperand = '';
+        secondOperand = '';
         operator ='';
         output.textContent = '';
         return;
@@ -100,11 +104,11 @@ function nextAction(e) {
 
     //this section handles pressing a number after =
     if (operator == 'equals' && !e.target.hasAttribute('id')) {
-        numberOne = '';
-        numberTwo = '';
+        firstOperand = '';
+        secondOperand = '';
         operator ='';
         output.textContent = '';
-        let refresh = numberOne += e.target.textContent;
+        let refresh = firstOperand += e.target.textContent;
         output.textContent = refresh;
         return;
     }
@@ -122,54 +126,50 @@ function nextAction(e) {
         (lastInput == '+')
         )
         ||
-        (e.target.textContent == '=' && lastInput == '='))
-        {
+        (e.target.textContent == '=' && lastInput == '=')) {
 
-        if (operator == 'divide' || operator == 'multiply' || operator == 'minus' || operator == 'plus') {
-        operator = e.target.getAttribute('id');
-        }
-
-        return;
+            if (operator == 'divide' || operator == 'multiply' || operator == 'minus' || operator == 'plus') {
+                operator = e.target.getAttribute('id');
+            }
+            return;
     }
     
-    //this section handles the second number and prints the result to numberOne
+    //this section handles the second number and sends to print
     if (operator == 'divide' || operator == 'multiply' || operator == 'minus' || operator == 'plus') {
         
-        if (operator == 'divide' && 
-        e.target.hasAttribute('id')) {
-            let result = Number(numberOne) / Number(numberTwo);
-            numberTwo = '';
-            operator = e.target.getAttribute('id');
-            numberOne = result;
-            }
+        if (operator == 'divide' && e.target.hasAttribute('id')) {
+            let result = Number(firstOperand) / Number(secondOperand);
+            let roundResult = parseFloat(result.toPrecision(7)); //helps reduce rounding errors of calculators
+            secondOperand = '';
+            operator = e.target.getAttribute('id'); //updates the operator the one which triggered the calculation
+            firstOperand = roundResult;
+        }
         
-        else if (operator == 'multiply' && 
-        e.target.hasAttribute('id')) {
-            let result = Number(numberOne) * Number(numberTwo);
-            numberTwo = '';
+        else if (operator == 'multiply' && e.target.hasAttribute('id')) {
+            let result = Number(firstOperand) * Number(secondOperand);
+            let roundResult = parseFloat(result.toPrecision(7));
+            secondOperand = '';
             operator = e.target.getAttribute('id');
-            numberOne = result;
-            }   
+            firstOperand = roundResult;
+        }   
 
-        else if (operator == 'minus' && 
-        e.target.hasAttribute('id')) {
-            let result = Number(numberOne) - Number(numberTwo);
-            numberTwo = '';
+        else if (operator == 'minus' && e.target.hasAttribute('id')) {
+            let result = Number(firstOperand) - Number(secondOperand);
+            let roundResult = parseFloat(result.toPrecision(7));
+            secondOperand = '';
             operator = e.target.getAttribute('id');
-            numberOne = result;
-            }  
+            firstOperand = roundResult;
+        }  
         
-        else if (operator == 'plus' && 
-        e.target.hasAttribute('id')) {
-            let result = Number(numberOne) + Number(numberTwo);
-            //let roundResult = parseFloat(result.toFixed(8))
-            numberTwo = '';
+        else if (operator == 'plus' && e.target.hasAttribute('id')) {
+            let result = Number(firstOperand) + Number(secondOperand);
+            let roundResult = parseFloat(result.toPrecision(7));
+            secondOperand = '';
             operator = e.target.getAttribute('id');
-            //numberOne = roundResult;
-            numberOne = result;
-            } 
+            firstOperand = roundResult;
+        } 
 
-        else {numberTwo += e.target.textContent}
+        else {secondOperand += e.target.textContent}
     }
         
     //this section factors the first number
@@ -179,13 +179,13 @@ function nextAction(e) {
     else if (e.target == plus) {operator = 'plus'}
     else if (e.target.textContent == '=') {return}
 
-    else {numberOne += e.target.textContent}
+    else {firstOperand += e.target.textContent}
 
     //this section determines what is displayed on-screen
-    if (numberTwo > 0 || numberTwo.includes('.')) {    //ensures .x and larger numbers appear
-        output.textContent = numberTwo;
+    if (secondOperand > 0 || secondOperand.includes('.')) {    //ensures .x and larger numbers appear
+        output.textContent = secondOperand;
     }
-    else {output.textContent = numberOne}
+    else {output.textContent = firstOperand}
 }
 
 //also creates an animation
