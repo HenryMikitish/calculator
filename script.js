@@ -45,7 +45,8 @@ function nextAction(e) {
         (lastInput !== 'x') &&
         (lastInput !== '-') &&
         (lastInput !== '+') &&
-        (e.target.textContent == '=')) {
+        (lastInput !== '=')
+        ) {
             return;
     }
 
