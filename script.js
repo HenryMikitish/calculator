@@ -44,7 +44,8 @@ function nextAction(e) {
         (lastInput !== '÷') && 
         (lastInput !== 'x') &&
         (lastInput !== '-') &&
-        (lastInput !== '+')) {
+        (lastInput !== '+') &&
+        (e.target.textContent == '=')) {
             return;
     }
 
